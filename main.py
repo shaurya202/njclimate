@@ -11,16 +11,17 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 import pandas as pd
 
-def calc_avg(ls) -> int:
+def calc_avg(ls: list[int, int]) -> int:
     return ls[0]/ls[1]
 
 df = pd.read_csv("4276814.csv")
 
-data = df.to_dict(orient="records")
+data = df.to_dict(orient="records") # turns df into list of dicts
 
-year_total_count = {'2023': [0, 0], '2024': [0, 0], '2025':[0, 0]} # first is total, second is count
+year_total_count = {'2023': [0, 0], '2024': [0, 0], '2025':[0, 0]} # first is total, second is count, used for tracking the average for each year
 
 # Using DATE, TAVG
+# Finds average for each year
 for dat in data:
     if pd.isna(dat['TAVG']):
         continue
@@ -31,6 +32,8 @@ for dat in data:
     year_total_count[date][1] += 1
     year_total_count[date][0] += tavg
 
+
+# Prints averages
 for yr in range(2023, 2026):
     print(f"{yr}: {calc_avg(year_total_count[str(yr)])}")
 
