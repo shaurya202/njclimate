@@ -36,14 +36,12 @@ for dat in data:
 
 tmps = [] # temperature list
 yrs = [int(i) for i in year_total_count]
-# Prints averages
+
 for yr in yrs:
     tmps.append(calc_avg(year_total_count[str(yr)]))
 
 slope, intercept, r, p, std_err = stats.linregress(yrs, tmps)
 
-tmpmodel = list(map(lambda x: slope * x + intercept, yrs))
+print(f"\n2030 avg. temperature: {slope * 2030 + intercept}")
 
-plt.scatter(yrs, tmps)
-plt.plot(yrs, tmpmodel)
-plt.show()
+# tmpmodel = list(map(lambda x: slope * x + intercept, yrs))
