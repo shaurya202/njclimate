@@ -42,6 +42,13 @@ for yr in yrs:
 
 slope, intercept, r, p, std_err = stats.linregress(yrs, tmps)
 
-print(f"\n2030 avg. temperature: {slope * 2030 + intercept}")
+while True:
+    try:
+        user_est = int(input("Enter a year: "))
+        break
+    except ValueError:
+        print("Please enter a number.")
+
+print(f"\n{user_est} avg. temperature: {slope * user_est + intercept}")
 
 # tmpmodel = list(map(lambda x: slope * x + intercept, yrs))
